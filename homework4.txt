@@ -1,0 +1,45 @@
+class Car {
+    String model;
+    private int year;
+    public int getYear() {return year;}
+    public void setYear(int year) {
+        if (year >= 1885 && year <= 2025)
+         this.year = year;
+         else this.year = 0;
+    }
+    String brand;
+    String type;
+    void makeBeBe (){
+        System.out.println (brand + " " + model + " " + year + " Be-Be!");
+    }
+    void makeBeBe2 (){
+        System.out.println (brand + " " + model + " " + type + " " + year + " Be-Be!");
+    }
+    Car(String INmodel, int INyear, String INbrand, String INtype) {
+    this.model = INmodel;
+    this.year = INyear;
+    this.brand = INbrand;
+    this.type = INtype;
+    this.makeBeBe2();
+    }
+    Car (){};
+    Car (String INmodel, int INyear, String INbrand) {
+        this.model = INmodel;
+        this.year = INyear;
+        this.brand = INbrand;
+        this.makeBeBe();
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+    Car car1 = new Car ("2106", 1988, "Лада");
+    Car car2 = new Car ("Patriot", 2011, "Уаз", "Внедорожник");
+    Car car3 = new Car ("2109", 2001, "VAZ");
+
+        Car car4 = new Car();
+        car4.model = "Веста";
+        car4.setYear(2026);
+        car4.brand = "Лада";
+        car4.makeBeBe();
+    }
+}
