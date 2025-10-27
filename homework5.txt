@@ -1,0 +1,45 @@
+package org.example;
+
+import java.util.Scanner;
+
+class Deposit {
+    static float percent = 0.07f;
+
+    static void main(String[] args) {
+        System.out.println("Введи значение 1 для цикла For или 2 для цикла While");
+        Scanner console = new Scanner(System.in);
+        int forwhile = console.nextInt();
+        if (forwhile == 1) {
+            depositfor();
+        } else if (forwhile == 2) {
+            depositwhile();
+        } else {
+            System.out.println("Значение должно быть 1 или 2!");
+        }
+    }
+    // проценты через for
+    static void depositfor() {
+        Scanner console = new Scanner(System.in);
+        System.out.println("Введите сумму депозита: ");
+        float depositsumm = console.nextFloat();
+        System.out.println("Введите количество месяцев: ");
+        int month = console.nextInt();
+        for (int i = 1; i <= month; i++) {
+            depositsumm = depositsumm + (depositsumm * percent);
+        }
+        System.out.print("Сумма на вкладе: " + depositsumm);
+    }
+    // проценты через while
+    static void depositwhile() {
+        Scanner console = new Scanner(System.in);
+        System.out.println("Введите сумму депозита: ");
+        float depositsumm = console.nextFloat();
+        System.out.println("Введите количество месяцев: ");
+        int month = console.nextInt();
+        while (month > 0) {
+            depositsumm = depositsumm + (depositsumm * percent);
+            month--;
+        }
+        System.out.print("Сумма на вкладе: " + depositsumm);
+    }
+}
