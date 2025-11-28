@@ -1,0 +1,14 @@
+package org.example;
+
+public class Lesson9 {
+    public static int getRandomMonth() {
+        return (int) (Math.random() * 3);
+    }
+
+    void main(String[] arg) {
+        String[] month = {"январь", "февраль", "март"};
+        int randomMonth = getRandomMonth();
+        String random = month[randomMonth];
+        System.out.println("Месяц отпуска " + random);
+    }
+}
