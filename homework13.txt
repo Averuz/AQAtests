@@ -1,0 +1,19 @@
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class newException {
+    @Test
+     void exception() {
+        try {
+            System.out.println(null);                   /// после изучения вопроса, я пришел к выводу, что данную ошибку не обработать, т.к. она вызывается
+                                                        /// на этапа компиляции из-за того, что не может определиться к какому типу данных отнести null
+            Assertions.assertTrue(false);
+//        } catch (NullPointerException e) {
+//            System.err.println("Ошибка вызова null объекта");
+//            e.printStackTrace();
+          } catch (AssertionError e) {
+            System.err.println("Условие ложно");
+            e.printStackTrace();
+        }
+    }
+}

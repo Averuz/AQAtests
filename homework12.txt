@@ -1,0 +1,106 @@
+//BaseTest
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+abstract public class BaseTest {
+    public void setUp() {
+        WebDriverManager.chromedriver().setup();
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1920x1080";
+        Configuration.headless = false;
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(true)
+        );
+    }
+
+    @BeforeEach
+    public void init() {
+        setUp();
+    }
+
+    @AfterEach
+    @Step("Заканчиваем выполнение теста.")
+    public void tearDown(){
+        Selenide.closeWebDriver();
+    }
+}
+//MainPage
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+import org.openqa.selenium.Keys;
+import java.time.Duration;
+import static com.codeborne.selenide.Selenide.$x;
+
+public class MainPage {
+    private final SelenideElement searchInput = $x("//textarea[@placeholder=\"Найдётся всё\"]");
+
+    @Step("Открыть сайт {url}")
+    public void openWebSite(String url){
+        Selenide.open(url);
+    }
+
+    @Step("Кликнуть в поле поиска")
+   public void click(){
+        searchInput.shouldBe(Condition.visible, Duration.ofSeconds(5));
+        searchInput.click();
+   }
+
+    @Step("Выполнить поиск по запросу: {searchString}")
+    public void search(String searchString){
+        searchInput.setValue(searchString);
+        searchInput.sendKeys(Keys.ENTER);
+    }
+}
+//SearchPage
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+
+import java.time.Duration;
+
+import static com.codeborne.selenide.Selenide.$x;
+
+public class SearchPage {
+    private final SelenideElement searchLogo = $x("//a[@class=\"HeaderLogo\"]");
+
+    @Step("Проверить видимость логотипа")
+    public void checkLogo() {
+        boolean isLogoVisible = searchLogo.is(Condition.visible, Duration.ofSeconds(5));;
+        if (isLogoVisible) {
+            System.out.println("Логотип отображается!");
+        } else {
+            System.out.println("Что-то в яндексе сломалось.");
+        }
+    }
+
+}
+//YandexTest
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+public class YandexTest extends BaseTest {
+
+    private final static String BASE_URL = "https://ya.ru/";
+    private final static String SEARCH_STRING = "selenide java примеры";
+
+    @Test
+    @DisplayName("Проверяем функционал yandex")
+
+    public void checkYa() {
+        MainPage mainPage = new MainPage();
+        mainPage.openWebSite(BASE_URL);
+        mainPage.click();
+        mainPage.search(SEARCH_STRING);
+        SearchPage searchPage = new SearchPage();
+        searchPage.checkLogo();
+    }
+}
