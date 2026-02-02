@@ -1,0 +1,14 @@
+package org.example;
+
+public class Arrays {
+    public void main(String[] args) {
+        System.out.println();
+        String[] array_of_strings2 = {"привет", "ПОКА", "гипербола"};
+        String upperCase = array_of_strings2[0].toUpperCase();
+        String lowerCase = array_of_strings2[1].toLowerCase();
+        StringBuilder sb = new StringBuilder (array_of_strings2[2]);
+        sb.insert(2, 'О');
+        sb.insert(3, " ");
+        System.out.println(upperCase + " " + lowerCase + " "+ sb);
+    }
+}

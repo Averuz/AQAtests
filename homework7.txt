@@ -1,0 +1,32 @@
+class Employee{
+    String name;
+    int salary;
+}
+
+class Developer extends Employee{
+    public static void work(){
+        System.out.println("He is working as a developer!");
+    }
+}
+class Manager extends Employee{
+    public static void work(){
+        System.out.println("He is working as a manager!");
+    }
+}
+////////////////////////////////////////////
+
+public abstract class Shape {
+  public abstract void draw();
+}
+
+class Circle extends Shape{
+    public void draw() {
+        System.out.println("Круг рисуется!");
+    }
+}
+
+class Rectangle extends Shape{
+   public void draw() {
+       System.out.println("Прямоугольник рисуется!");
+   }
+}

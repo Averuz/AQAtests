@@ -1,0 +1,62 @@
+package org.example;
+
+public class Lesson8 {
+ public enum numberOfStrings {
+     guitar(6),
+     piano(230);
+
+     private int count;
+
+     numberOfStrings(int count) {
+         this.count = count;
+     }
+    public int getCount(){
+        return count;
+    }
+}
+}
+
+public interface Playable {
+     void play(Lesson8.numberOfStrings numberOfStrings);
+}
+
+public class Guitar implements Playable  {
+    public String name;
+    public Guitar(String name){
+        this.name = name;
+    }
+
+    public void play(Lesson8.numberOfStrings numberOfStrings) {
+        System.out.println(name + " играет и у нее " + numberOfStrings.getCount() + " струн.");
+    }
+}
+
+public class Piano implements Playable  {
+    public String name;
+    public Piano(String name){
+        this.name = name;
+    }
+
+    public void play(Lesson8.numberOfStrings numberOfStrings) {
+        System.out.println(name + " играет и у него " + numberOfStrings.getCount() + " струн.");
+    }
+}
+public class Guitar implements Playable  {
+    public String name;
+    public Guitar(String name){
+        this.name = name;
+    }
+
+    public void play(Lesson8.numberOfStrings numberOfStrings) {
+        System.out.println(name + " играет и у нее " + numberOfStrings.getCount() + " струн.");
+    }
+}
+//////////////////////////////
+public class Main {
+    public static void main(String[] args){
+        Playable guitar = new Guitar("Гитара");
+        Playable piano = new Piano("Пианино");
+        guitar.play(Lesson8.numberOfStrings.guitar);
+        piano.play(Lesson8.numberOfStrings.piano);
+    }
+}
